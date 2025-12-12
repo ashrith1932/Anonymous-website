@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Libertinus+Keyboard&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Libertinus+Keyboard&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap');
+
+.boding {
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000;
+    background: radial-gradient(circle at 8% 8%, #2a2a2a, #000000 120%); /* Ensure this path is correct for your project */
+    background-size: cover;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    overflow-x: hidden; /* Prevents scrollbar if content gets too wide */
+}
+
+/* Container to center title and tagline together */
+.heroContainer {
+    position: absolute;
+    top: 35%; /* Adjusted to balance the new text */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title, .innertitle {
+    color: white;
+    font-size: 130px;
+    font-family: "League Spartan", sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    line-height: 1; /* Tighter line height */
+    position: relative;
+}
+
+.title::after {
+    content: 'TRULY ANONYMOUS';
+    position: absolute;
+    width: max-content;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 100%; /* Adjusted position relative to title */
+    right: -60px; /* Moves it to the right of the title */ /* Rotates it vertically for style */
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+.shield {
+    color: rgb(108, 107, 107);
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    margin-top: 15px;
+    font-weight: 600; /* Space between title and this text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NEW STYLE FOR THE ADDED TEXT */
+.tagline {
+    color: white;
+    font-family: "League Spartan", sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 40px; /* Space between title and this text */
+    letter-spacing: 3px;
+    width: 80%; /* Prevents it from hitting edges on small screens */
+    line-height: 1.4;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.highlight {
+    color: #e0c8a4; /* The gold accent color */
+}
+.enter{
+    position: absolute;
+    width: 100%;
+    top: 70%;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap:150px;
+}
+
+.navbar {
+    height: 8.3vh;
+    width: 100vw;
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0; /* Centered navbar looks cleaner */
+    top: 0%;
+    gap: 100px;
+    left: 0%;
+    margin: 0px;
+    z-index: 10;
+}
+
+.navlink {
+    font-size: 23px;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    margin: 20px;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+    border: solid transparent 1px; /* Transparent border prevents layout shift on hover */
+    min-width: 80px;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.login,.signup {
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    width: max-content;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.424);
+    padding: 10px 25px;
+    border-radius: 25px;
+    border-color: transparent;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 15px rgba(123, 123, 123, 0.3);
+}
+
+.login:hover,.signup:hover {
+    background-color: #e0c8a4cf;
+    color: #000000;
+    border-color: aliceblue;
+}
+
+
+.navlink::after {
+    content: '';
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 100%;
+    width: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+    background-color: #e0c8a4;
+    transition: width 0.3s ease;
+}
+
+.navlink:hover::after {
+    width: 100%;
+}
+
+.navlink:hover {
+    color: #e0c8a4;
+    cursor: pointer;
+}
+
+.innertitle {
+    color: #e0c8a4;
+}
+
+
+.model{
+    position: fixed;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    font-family: "BBH Bartle", sans-serif;
+    color: #e0c8a4;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding:60px;
+    background: rgba(20, 19, 19, 0.547);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.4);
+}
+.close{
+    margin:0px;
+    position:absolute;
+    right:25px;
+    padding:7px 7px 2px 7px;
+    border-radius: 10px;
+    top:25px;
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.close:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.129);
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap : 20px;
+    font-family: "riverlet", sans-serif;
+}
+
+.inputgroup{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.inputfield{
+     margin-top: 4px;
+    height: 30px;
+    border: solid rgba(255,255,255,0.2) 1px;
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.1); /* ADD THIS */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.4);
+    color: #fff; /* so text is visible */
+    padding: 2px 8px 2px 8px;
+    
+}
+
+.inputfield:focus{
+    outline: none;
+    border: solid #e0c8a4 1px;
+    box-shadow: 0 0 10px #d1b99458;
+}
+
+.inputlabel{
+    font-size: 20px;
+    color: rgb(232, 232, 232);
+}
+
+.t1{
+    margin: 0px;
+    padding: 0px;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 4500;
+    color: rgb(227, 224, 224);
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.t1 span{
+    color: rgb(143, 143, 196);
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.t1 span:hover{
+    text-decoration: underline;
+}
+.submitbutton{
+    margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(241, 203, 122, 0.493);
+    color: #000000;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow:0px 8px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
+}
+
+.submitbutton:hover{
+    background-color: #d4b483;
+}
+
+.loginhero{
+    text-align:center;font-size:30px;font-weight:400;margin-bottom:40px
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .title, .innertitle {
+        font-size: 100px;
+    }
+    .tagline {
+        font-size: 22px;
+    }
+    .navbar {
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title, .innertitle {
+        font-size: 80px;
+    }
+    .navbar {
+        gap: 15px;
+        padding-left: 0;
+    }
+    .navlink {
+        font-size: 18px;
+        padding: 5px 10px;
+        min-width: 60px;
+    }
+    .tagline {
+        font-size: 18px;
+        margin-top: 30px;
+        width: 90%;
+    }
+    .title::after {
+        display: none; /* Hide the side signature on mobile to prevent overflow */
+    }
+
+    .enter{
+        gap:60px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .title, .innertitle {
+        font-size: 60px;
+    }
+
+    .model{
+        padding:60px 40px 20px 30px;
+    }
+
+    .navlink {
+        font-size: 10px;
+        
+    }
+    /* .boding {
+        background-image: linear-gradient(90deg, #000000, #464646);
+    } */
+    .tagline {
+        font-size: 14px;
+        margin-top: 20px;
+        letter-spacing: 1px;
+    }
+    .shield {
+        font-size: 14px;
+    }
+    .innershield{
+        margin:0px ;
+        padding:0px ;
+    }
+    .enter{
+        flex-direction: column;
+        gap:20px;
+        justify-content: center;
+        align-items: center;
+    }
+    .close{
+        top:15px;
+        right:15px;
+    }
+
+    .loginhero{
+        margin-bottom: 10px;
+    }
+}

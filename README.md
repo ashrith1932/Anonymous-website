@@ -82,7 +82,8 @@ This project provides:
 **Frontend:**  
 - HTML  
 - CSS Modules  
-- JavaScript  
+- JavaScript
+- React
 
 **Backend:**  
 - Node.js / Express (or replace with your own backend)
@@ -97,7 +98,7 @@ This project provides:
 - Private communities  
 - Feedback/confession platforms  
 - Polling/voting systems  
-- Decentralized/identity-free experiments  
+- Decentralized/identity-free experiments
 
 ---
 

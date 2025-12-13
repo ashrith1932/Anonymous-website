@@ -1,8 +1,18 @@
 import styles from "./home.module.css";
 import { Shield, Eye, EyeOff, ArrowRight,CopyX } from 'lucide-react';
 import { use, useState } from "react";
+import { Copy, Check,Repeat } from "lucide-react";
+
 function Home() {
     const[islogin,setIslogin]=useState("");
+    const [copied, setCopied] = useState(false);
+    const [loginkey, setloginkey] = useState("");
+    const dict = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$*";
+    const handleCopy = async () => {
+            await navigator.clipboard.writeText(loginkey);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+        };
     return (
         <div className={styles.boding}>
             <nav className={styles.navbar}>
@@ -24,10 +34,10 @@ function Home() {
                 </div>
             </div>
             <div className={styles.enter}>
-                <div class = {styles.login} onClick={()=>{setIslogin("login")}}>
+                <div className = {styles.login} onClick={()=>{setIslogin("login")}}>
                     LOGIN
                 </div>
-                <div class = {styles.signup} onClick={()=>{setIslogin("signup")}}>
+                <div className = {styles.signup} onClick={()=>{setIslogin("signup")}}>
                     SIGN-UP
                 </div>
             </div>
@@ -56,7 +66,13 @@ function Home() {
                     (<form className={styles.form}>
                         <div className={styles.inputgroup}>
                             <label className={styles.inputlabel}>Login-key</label>
-                            <input type="text" placeholder="Enter your Login-key" className={styles.inputfield} />
+                            <div className={styles.loginkeycontainer}>
+                                <input type="text" value = {loginkey} onChange={(e)=>setloginkey(e.target.value)} placeholder="Generate" className={styles.inputfield} />
+                                    <button type="button" onClick={handleCopy} className={styles.copybutton}>
+                                        {copied ? <Check size={18} color="green" /> : <Copy size={18} />}
+                                    </button>
+                            </div>
+                            <div className={`${styles.submitbutton} ${styles.loginkey}`}><Repeat size={18}/>Generate</div>
                         </div>
                         <div className={styles.inputgroup}>
                             <label className={styles.inputlabel}>Password</label>

@@ -103,5 +103,49 @@ const generateloginkey = async(req, res) => {
     }
 }
 
+const checkusername = async(req,res)=>{
+    try{
+        const username = req.body.username;
+        const v = await user.checkusername(username);
+        if(!v){
+            return res.status(200).json({
+                available:true,
+            })
+        }
+        else{
+            return res.status(200).json({
+                available:false,
+            })
+        }
+    }catch(error){
+        console.error("Internal user error :",error);
+        return res.status(error.statusCode || 500).json({
+            message: error.message || "Internal error while checking username"
+        });
+    }
+}
 
-module.exports = { login, signup, generateloginkey };
+const update=async(req,res)=>{
+    try{
+        const data = req.body.data;
+        const loginkey = req.body.loginkey;
+        const v = await user.update(loginkey,data);
+        if(v){
+            res.status(201).json({
+                data:v
+            })
+        }else{
+            return res.status(error.statusCode || 500).json({
+                message: error.message || "Internal error while updating data"
+            });
+        }
+    }catch(error){
+        console.error("Internal user error :",error);
+        return res.status(error.statusCode || 500).json({
+            message: error.message || "Internal error while updating data"
+        });
+    }
+}
+
+
+module.exports = { login, signup, generateloginkey,checkusername,update };

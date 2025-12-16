@@ -347,11 +347,25 @@
     border-radius: 5px;
     font-size:2px;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .caution{
     color: white;
     background-color: rgb(55, 165, 55,0.2);
+}
+
+.green{
+    background-color: rgba(0, 255, 0, 0.198);
+    font-weight: 400;
+}
+
+.red{
+    background-color: rgba(255, 0, 0, 0.202);
+    font-weight: 400;
 }
 
 .loader {
@@ -400,6 +414,7 @@
 
 .inputLabel{
     font-size: 15px;
+    color: #e6e3e3 ;
 }
 
 .inputField{
@@ -429,6 +444,8 @@
 
 .helperText{
     font-size: 5px;
+    color: #c2c1c1;
+    text-decoration: underline;
 }
 
 .continueButton:disabled{
@@ -448,11 +465,19 @@
     margin-top: 15px;
     font-size: 20px;
     border-radius: 9px;
+    border: none;
     width: 100%;
     color: rgb(63, 62, 62);
     background-color: #ffffffe7;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.13s ease;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.continueButton:hover{
+    transform: scale(1.05);
+    font-size: 20px;
+    cursor: pointer;
 }
 
 

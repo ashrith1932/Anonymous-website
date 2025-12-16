@@ -2,7 +2,8 @@ import styles from "./Guest.module.css";
 import { Shield, Eye, EyeOff, ArrowRight, CopyX } from 'lucide-react';
 import { useState } from "react";
 import { Copy, Check, Repeat } from "lucide-react";
-import { use } from "react";
+import { useEffect } from "react";
+
 
 function Guest() {
     const [islogin, setIslogin] = useState("");
@@ -17,8 +18,50 @@ function Guest() {
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [ageConfirmed, setAgeConfirmed] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
-    const [showAgeInfo, setShowAgeInfo] = useState(false);
+    const[username,setusername] = useState("");
+    const[usernameok,setusernameok] = useState(false);
+    const [isCheckingUser, setIsCheckingUser] = useState(false);
 
+    // Add this near your other state variables
+
+// 1. Change handleusername to ONLY update the text input
+
+
+useEffect(() => {
+    if (!username) {
+        setusernameok(false);
+        setIsCheckingUser(false);
+        return;
+    }
+
+    if (username.length < 5) {
+        setusernameok(false);
+        setIsCheckingUser(false);
+        return;
+    }
+
+    const timeoutId = setTimeout(async () => {
+        setIsCheckingUser(true);
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_BACK_URL}/api/auth/checkusername`,
+                {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username })
+                }
+            );
+            const data = await res.json();
+            setusernameok(!!data.available);
+        } catch {
+            setusernameok(false);
+        }
+        setIsCheckingUser(false);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+}, [username]);
+ // Dependencies: run this whenever 'username' changes
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const generateloginkey = async() => {
@@ -75,8 +118,13 @@ function Guest() {
             if (!res.ok) {
                 throw new Error(data.message || "Login failed");
             }
-            if(!data.details){
-                setdetails(-1);
+            if(!data.user.details){
+                setusername(""); 
+                setusernameok(false);
+                setdetails(1);
+                setIslogin("");
+            }
+            else{
                 setIslogin("");
             }
             console.log("Login successful:", data);
@@ -161,6 +209,35 @@ function Guest() {
         }
     };
 
+    const handleusername = (e) => {
+    const value = e.target.value;
+    setusername(value);
+    setusernameok(false); // Reset status while they are typing
+    };
+
+    const handleusernamesubmission=async()=>{
+        if(!usernameok){return}
+        try{
+            const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/auth/updatedata`,{
+                method:'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    loginkey: loginkey,
+                    data:username,
+                })
+            });
+            const data = await res.json();
+            if(data){setdetails(0);setusername("")}
+            else{setdetails(1);}
+
+        }catch(error){
+            console.error("username error :", error);
+        }
+
+    }
+
     const detailsmodal = ()=>{
         return(
         <div className={styles.detailModel}>
@@ -169,15 +246,26 @@ function Guest() {
                 {/* Username */}
             <div className={styles.inputGroup}>
                 <label className={styles.inputLabel}>
-                    Display Username
+                    Username*
                 </label>
                 <input
                     type="text"
                     className={styles.inputField}
                     placeholder="e.g. silent_moth"
                     maxLength={20}
+                    value={username}
+                    onChange={(e)=>{handleusername(e)}}
                     autoComplete="off"
+                    minLength={5}
                 />
+                {username && (
+                            <div className={`${styles.error} ${styles.caution} ${usernameok ? styles.green : styles.red}`}>
+                                {username.length < 5 ? ("Minimum 5 characters required") 
+                                    : isCheckingUser ? (<span className={styles.loader}></span>) 
+                                        : usernameok ? ("Username available") 
+                                        : ("Username not available")}
+                            </div>
+                )}
                 <span className={styles.helperText}>
                     Make most irrelevent username to stay more anonymous.
                 </span>
@@ -196,7 +284,6 @@ function Guest() {
                         I agree to the{" "}
                         <a
                             className={styles.linkButton}
-                            onClick={() => setShowTerms(true)}
                             href="https://chatgpt.com/c/694027cc-74dc-8321-9acf-6674cc943947"
                             target="_blank"
                             >
@@ -218,12 +305,22 @@ function Guest() {
                 </label>
 
             </div>
+            <span className={styles.helperText}>
+                    Username is non-credential and can be changed later
+            </span>
 
         {/* Action */}
             <button
                 className={styles.continueButton}
-                disabled={!termsAccepted || !ageConfirmed}>
+                disabled={!termsAccepted || !ageConfirmed || !usernameok}
+                onClick={handleusernamesubmission}
+                >
                 Continue
+            </button>
+            <button
+                className={styles.continueButton}
+                onClick={()=>{setdetails(0);setusername("");setusernameok(false);}}>
+                    Cancel
             </button>
         </div>
         )
@@ -232,7 +329,7 @@ function Guest() {
 
     return (
         <div className={styles.boding}>
-            {true&&detailsmodal()}
+            {enterdetails===1&& detailsmodal()}
 
             <nav className={styles.navbar}>
                 <a href="#" className={styles.navlink}>Guest</a>
@@ -330,10 +427,11 @@ function Guest() {
                                     <div className={styles.loginkeycontainer}>
                                         <input 
                                             type="text" 
+                                            disabled
                                             value={loginkey} 
-                                            readOnly 
                                             placeholder="Click to Generate" 
                                             className={styles.inputfield}
+                                            autoComplete="new-password"
                                         />
                                         <button 
                                             type="button" 

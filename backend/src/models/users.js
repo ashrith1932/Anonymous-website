@@ -34,6 +34,72 @@ const checkuser = async(loginkey)=>{
     return user;
 }
 
+const checkusername = async(username)=>{
+    let db=await connectDB();
+    if(!db){
+        const error = new Error("Database Connection Error");
+        error.statuscode = 404;
+        throw error;
+    }
+    const users = db.collection("users");
+    if(!users){
+        const err = new Error("Database Collection Error while checking user");
+        err.statuscode = 404;
+        throw err;
+    }
+    try{
+    const user = await users.findOne({username:username});
+    return user;
+    }catch(error){
+        const err = new Error("error fetching username");
+        err.statuscode = 404;
+        throw err;
+    }
+}
+
+// src/models/users.js
+
+// ... existing imports
+
+const update = async(loginkey, data) => {
+    let db = await connectDB();
+    if(!db){
+        const error = new Error("Database Connection Error while updating user data");
+        error.statuscode = 404;
+        throw error;
+    }
+    const users = db.collection("users");
+    if(!users){
+        const err = new Error("Database Collection Error while updating user data");
+        err.statuscode = 404;
+        throw err;
+    }
+    try {
+        // FIX 1: Hash the login key so it matches what is in the database
+        const hashed = hashLoginKey(loginkey);
+
+        // FIX 2: Use "username" as the key, and explicitly set details to true
+        // Note: 'data' variable contains the username string passed from controller
+        const user = await users.updateOne(
+            { loginkey: hashed },
+            { 
+                $set: { 
+                    username: data,   // Save specifically to 'username' field
+                    details: true     // Mark profile as completed
+                } 
+            }
+        );
+        return user;
+    }
+    catch(error){
+        const err = new Error("error updating data", data);
+        err.statuscode = 404;
+        throw err;
+    }
+}
+
+// ... existing exports
+
 const loginuser = async(loginkey,password)=>{
 
     let db=await connectDB();
@@ -97,4 +163,4 @@ const getunique = async () => {
 };
 
 
-module.exports = {checkuser,loginuser,createuser,getunique};
+module.exports = {checkuser,loginuser,createuser,getunique,checkusername,update};

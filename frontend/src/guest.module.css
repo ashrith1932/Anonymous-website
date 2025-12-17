@@ -529,6 +529,10 @@
     .enter{
         gap:60px;
     }
+    .error,.helperText{
+        font-size:12px;
+    }
+
 
 }
 

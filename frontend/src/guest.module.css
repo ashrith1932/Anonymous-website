@@ -422,6 +422,7 @@
     border:solid 1px rgb(227, 175, 102);
     padding:9px;
     font-size: 9px;
+    width:100%;
 }
 
 .linkButton{
@@ -573,7 +574,7 @@
     .loginhero{
         margin-bottom: 10px;
     }
-    .error{
+    .error,.helperText{
         font-size:12px;
     }
 }

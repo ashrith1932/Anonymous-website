@@ -1,4 +1,4 @@
-import styles from "./Guest.module.css";
+import styles from "./guest.module.css";
 import { Shield, Eye, EyeOff, ArrowRight, CopyX } from 'lucide-react';
 import { useState } from "react";
 import { Copy, Check, Repeat } from "lucide-react";

@@ -502,7 +502,12 @@
         gap: 50px;
     }
     .error,.helperText{
-        font-size:18px;
+        font-size:14px;
+    }
+
+    .inputField{
+        font-size:10px;
+        width: 90%;
     }
 }
 
@@ -510,6 +515,7 @@
 @media (max-width: 768px) {
     .title, .innertitle {
         font-size: 80px;
+        
     }
     .navbar {
         gap: 15px;

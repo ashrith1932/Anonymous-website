@@ -127,7 +127,7 @@ useEffect(() => {
             else{
                 setIslogin("");
             }
-            console.log("Login successful:", data);
+            console.log("Login successful:");
             alert("Login successful!");
             // if(data.details)
             // Add your redirect logic here

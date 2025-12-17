@@ -154,7 +154,7 @@ useEffect(() => {
                 throw new Error("Please generate a login key first");
             }
 
-            console.log("Sending signup request:", { loginkey, password: "***" });
+            console.log("Sending signup request:");
 
             const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/auth/signup`, {
                 method: "POST",
@@ -185,7 +185,7 @@ useEffect(() => {
                 throw new Error(data.message || "Signup failed");
             }
 
-            console.log("Signup successful:", data);
+            console.log("Signup successful:");
             alert("Signup successful! You can now login.");
             setIslogin("login");
             setpassword("");

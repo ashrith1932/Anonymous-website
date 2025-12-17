@@ -501,6 +501,9 @@
     .navbar {
         gap: 50px;
     }
+    .error,.helperText{
+        font-size:18px;
+    }
 }
 
 
@@ -530,7 +533,7 @@
         gap:60px;
     }
     .error,.helperText{
-        font-size:12px;
+        font-size:16px;
     }
 
 

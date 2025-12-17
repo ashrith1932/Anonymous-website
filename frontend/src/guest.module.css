@@ -421,7 +421,7 @@
     border-radius: 5px;
     border:solid 1px rgb(227, 175, 102);
     padding:9px;
-    font-size: 9px;
+    font-size: 11px;
     width:100%;
 }
 
@@ -440,7 +440,7 @@
     border:solid 1px rgb(227, 175, 102);
     padding:9px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    font-size: 8px;
+    font-size: 11px;
 }
 
 .helperText{
